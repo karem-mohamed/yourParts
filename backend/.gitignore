@@ -3,6 +3,8 @@
 
 # Logs
 *.log
+logs
+logs/*
 
 # Runtime files
 .pids
