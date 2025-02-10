@@ -10,7 +10,6 @@
 *.sock
 
 # dotenv environment files
-.env
 
 # Build output
 /dist
