@@ -1,9 +1,9 @@
-import { redis } from "../config/redis";
+import { redis } from '../config/redis';
 
-export async function saveTokenInRedis(
+export async function saveValueInRedis(
   key: string,
-  value: number | string,
-  expire: number | undefined
+  value: string | number,
+  expire?: number
 ) {
   return await redis.set(key, value, expire ? { EX: expire } : {});
 }

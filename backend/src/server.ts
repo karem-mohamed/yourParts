@@ -2,17 +2,46 @@ import { Hono } from 'hono';
 import authRouter from './routes/auth';
 import logger from './utils/logger';
 import { loginRateLimiter } from './middlewares/rateLimiter';
+import cacheRequests from './middlewares/cacheRequests';
+import { saveValueInRedis } from './utils/redisFnc';
+// import { i18nMiddleware } from './middlewares/i18nMiddleware';
+import { languageDetector } from 'hono/language';
+import getLocaleValue from './utils/getLocaleValue';
+import { messages } from './locales/locales';
 
 const app = new Hono();
+
+///Localization
+app.use(
+  languageDetector({
+    supportedLanguages: ['en', 'ar'],
+    fallbackLanguage: 'en',
+  })
+);
+
+///Error Handler
 app.onError((err, c) => {
-  console.error('🚨 خطأ غير متوقع:', err);
   logger.error(err);
-  return c.json({ message: err.message || 'Something went wrong!' }, 500);
+  return c.json(
+    {
+      message: getLocaleValue(
+        c,
+        (err.message as keyof (typeof messages)['en']) || 'server_error'
+      ),
+    },
+    500
+  );
 });
 
+///Routes
 app.route('/auth', authRouter);
-app.get('/', loginRateLimiter, (c) => {
-  throw new Error('This is a test error!');
+
+app.get('/', cacheRequests, loginRateLimiter, async (c) => {
+  await saveValueInRedis(
+    c.req.url,
+    JSON.stringify({ products: [{ name: 'karem' }] }),
+    60 * 60 * 24
+  );
   return c.text('🚀 Server is running!');
 });
 
