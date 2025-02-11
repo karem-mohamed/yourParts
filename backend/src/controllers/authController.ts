@@ -48,7 +48,7 @@ export const forgetPassword = async (c: Context) => {
   return c.json({ message: getLocaleValue(c, 'otp_sent') });
 };
 
-export const verifyOtp = async (c: Context) => {
+export const verifyOtpAndResetPass = async (c: Context) => {
   const { otp, email, newPassword } = await c.req.json();
   const sameOtp = await checkOtp(otp, email);
   if (!sameOtp) {

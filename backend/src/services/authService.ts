@@ -8,14 +8,22 @@ import {
   removeFromRedis,
   saveValueInRedis,
 } from '../utils/redisFnc';
-import { get } from 'http';
 
 export async function registerUser(
   username: string,
   email: string,
   password: string
 ) {
+  const [user] = await db
+    .select()
+    .from(users)
+    .where(or(eq(users.email, email), eq(users.username, username)))
+    .limit(1);
+  if (user) {
+    throw new Error('email_or_username_is_used');
+  }
   const hashedPassword = await bcrypt.hash(password, 10);
+
   const [newUser] = await db
     .insert(users)
     .values({ username, email, password: hashedPassword })
