@@ -9,9 +9,27 @@ import {
 } from '../services/authService';
 import getLocaleValue from '../utils/getLocaleValue';
 import { saveValueInRedis } from '../utils/redisFnc';
+import { forgetPasswordSchema, loginSchema, registerSchema } from '../shemas';
+import { errorResponse } from '../utils/sendErrorResponse';
 
 export const register = async (c: Context) => {
   const { username, email, password } = await c.req.json();
+  const result = registerSchema.safeParse({
+    username,
+    email,
+    password,
+  });
+
+  if (!result.success) {
+    return errorResponse(
+      c,
+      400,
+      'Validation_Error',
+      getLocaleValue(c, 'validation_error'),
+      result.error.flatten().fieldErrors
+    );
+  }
+
   const { token, newUser } = await registerUser(username, email, password);
   return c.json({
     message: getLocaleValue(c, 'user_registered_success'),
@@ -22,6 +40,19 @@ export const register = async (c: Context) => {
 
 export const login = async (c: Context) => {
   const { identifier, password } = await c.req.json();
+  const result = loginSchema.safeParse({
+    identifier,
+    password,
+  });
+  if (!result.success) {
+    return errorResponse(
+      c,
+      400,
+      'Validation_Error',
+      getLocaleValue(c, 'validation_error'),
+      result.error.flatten().fieldErrors
+    );
+  }
   const { token, user } = await loginUser(identifier, password);
   return c.json({ message: getLocaleValue(c, 'login_success'), token, user });
 };
@@ -36,9 +67,20 @@ export const logout = async (c: Context) => {
 };
 
 export const forgetPassword = async (c: Context) => {
-  console.log(c.req.header('Accept-Language'));
-  console.log(c.get('language'));
   const { email } = await c.req.json();
+  const result = forgetPasswordSchema.safeParse({
+    email,
+  });
+  if (!result.success) {
+    return errorResponse(
+      c,
+      400,
+      'Validation_Error',
+      getLocaleValue(c, 'validation_error'),
+      result.error.flatten().fieldErrors
+    );
+  }
+
   const isExist = await userIsExist(email);
   if (!isExist) {
     return c.json({ message: getLocaleValue(c, 'user_not_found') }, 404);

@@ -39,10 +39,10 @@ export async function loginUser(identifier: string, password: string) {
     .from(users)
     .where(or(eq(users.email, identifier), eq(users.username, identifier)))
     .limit(1);
-  if (!user) throw new Error('inv_username_pass');
+  if (!user) throw new Error('inv_username_email');
 
   const validPassword = await bcrypt.compare(password, user.password);
-  if (!validPassword) throw new Error('inv_username_pass');
+  if (!validPassword) throw new Error('inv_pass');
 
   const token = nanoid();
   await saveValueInRedis(`auth:${token}`, user.id, 60 * 60 * 24);
