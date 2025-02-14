@@ -7,8 +7,7 @@ import { DatabaseError } from 'pg';
 import { ContentfulStatusCode } from 'hono/utils/http-status';
 export default async function errorHandler(err: any, c: Context) {
   logger.error(err);
-  console.log(err);
-  let status: ContentfulStatusCode = 500;
+  let status: ContentfulStatusCode = err.statusCode || 500;
   let code = 'Server_Error';
   let message: string = getLocaleValue(
     c,

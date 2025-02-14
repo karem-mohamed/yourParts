@@ -40,3 +40,14 @@ export const updatePostSchema = z.object({
   title: z.string().min(5).optional(),
   content: z.string().optional(),
 });
+
+/////////comments//////////////
+
+export const createCommentSchema = z.object({
+  content: z.string().nonempty(),
+  postId: z.string().uuid().nonempty(),
+});
+
+export const updateCommentSchema = z.object({
+  content: z.string().nonempty(),
+});

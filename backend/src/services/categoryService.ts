@@ -5,7 +5,6 @@ export const createCategory = async (
   userId: string,
   payload: { name: string; description?: string }
 ) => {
-  console.log(userId, 'wwwwww');
   const [newCategory] = await db
     .insert(categories)
     .values({

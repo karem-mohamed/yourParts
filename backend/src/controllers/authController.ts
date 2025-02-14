@@ -19,7 +19,6 @@ export const register = async (c: Context) => {
     email,
     password,
   });
-
   if (!result.success) {
     return errorResponse(
       c,

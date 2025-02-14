@@ -8,6 +8,7 @@ import {
   removeFromRedis,
   saveValueInRedis,
 } from '../utils/redisFnc';
+import { CustomError } from '../utils/customError';
 
 export async function registerUser(
   username: string,
@@ -20,7 +21,7 @@ export async function registerUser(
     .where(or(eq(users.email, email), eq(users.username, username)))
     .limit(1);
   if (user) {
-    throw new Error('email_or_username_is_used');
+    throw new CustomError('email_or_username_is_used', 400);
   }
   const hashedPassword = await bcrypt.hash(password, 10);
 
@@ -39,10 +40,10 @@ export async function loginUser(identifier: string, password: string) {
     .from(users)
     .where(or(eq(users.email, identifier), eq(users.username, identifier)))
     .limit(1);
-  if (!user) throw new Error('inv_username_email');
+  if (!user) throw new CustomError('inv_username_email', 400);
 
   const validPassword = await bcrypt.compare(password, user.password);
-  if (!validPassword) throw new Error('inv_pass');
+  if (!validPassword) throw new CustomError('inv_pass', 400);
 
   const token = nanoid();
   await saveValueInRedis(`auth:${token}`, user.id, 60 * 60 * 24);

@@ -1,6 +1,6 @@
 import { eq, and } from 'drizzle-orm';
 import { db } from '../config/db';
-import { posts } from '../models/schema';
+import { posts, postsToTags } from '../models/schema';
 export const createPost = async (
   userId: string,
   payload: { title: string; content: string; categoryId: number }
@@ -15,21 +15,46 @@ export const createPost = async (
   return newPost;
 };
 
+export const addTagtoPost = async (postId: string, tagId: number) => {
+  await db.insert(postsToTags).values({
+    postId,
+    tagId,
+  });
+};
+
+export const deleteTagFromPost = async (postId: string, tagId: number) => {
+  await db
+    .delete(postsToTags)
+    .where(and(eq(postsToTags.postId, postId), eq(postsToTags.tagId, tagId)));
+};
+
 export const getAllPosts = async () => {
-  const allPosts = await db.select().from(posts);
+  const allPosts = await db.query.posts.findMany({
+    with: {
+      comments: true,
+    },
+  });
   return allPosts;
 };
 
 export const getAllUserPosts = async (userId: string) => {
-  const allPosts = await db
-    .select()
-    .from(posts)
-    .where(eq(posts.userId, userId));
+  const allPosts = await db.query.posts.findMany({
+    where: eq(posts.userId, userId),
+    with: {
+      comments: true,
+    },
+  });
+
   return allPosts;
 };
 
 export const getDetails = async (id: string) => {
-  const [Post] = await db.select().from(posts).where(eq(posts.id, id)).limit(1);
+  const Post = await db.query.posts.findFirst({
+    where: eq(posts.id, id),
+    with: {
+      comments: true,
+    },
+  });
   return Post;
 };
 

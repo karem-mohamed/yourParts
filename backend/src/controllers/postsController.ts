@@ -3,13 +3,16 @@ import { errorResponse } from '../utils/sendErrorResponse';
 import getLocaleValue from '../utils/getLocaleValue';
 import { createPostSchema, updatePostSchema } from '../shemas';
 import {
+  addTagtoPost,
   createPost,
   deletePost,
+  deleteTagFromPost,
   getAllPosts,
   getAllUserPosts,
   getDetails,
   updatePost,
 } from '../services/postsService';
+import { getDetails as getTagDetails } from '../services/tagService';
 // import { findCategoryByIdAndUserId } from '../services/categoryService';
 
 export const create = async (c: Context) => {
@@ -120,105 +123,54 @@ export const deleteUserPost = async (c: Context) => {
   });
 };
 
-// // 3. Endpoints للوسوم (Tags)
-// app
-//   .post('/tags', async (c) => {
-//     const userId = c.get('userId');
-//     const { name } = await c.req.json();
+export const addTag = async (c: Context) => {
+  const postId = c.req.param('postId');
+  const tagId = parseInt(c.req.param('tagId'));
 
-//     const newTag = await db.insert(tags).values({
-//       name,
-//       userId,
-//     }).returning();
+  const postDetails = await getDetails(postId);
+  if (!postDetails) {
+    return errorResponse(
+      c,
+      400,
+      'PostNotFound',
+      getLocaleValue(c, 'PostNotFound')
+    );
+  }
+  const tagDetails = await getTagDetails(tagId);
+  if (!tagDetails) {
+    return errorResponse(
+      c,
+      400,
+      'TagNotFound',
+      getLocaleValue(c, 'TagNotFound')
+    );
+  }
+  await addTagtoPost(postId, tagId);
+  return c.json({ message: getLocaleValue(c, 'tag-added-to-post') });
+};
 
-//     return c.json(newTag[0]);
-//   })
-//   .get('/tags', async (c) => {
-//     const allTags = await db.select().from(tags);
-//     return c.json(allTags);
-//   })
-//   .put('/tags/:id', async (c) => {
-//     const userId = c.get('userId');
-//     const tagId = parseInt(c.req.param('id'));
-//     const { name } = await c.req.json();
+export const removeTag = async (c: Context) => {
+  const postId = c.req.param('postId');
+  const tagId = parseInt(c.req.param('tagId'));
 
-//     const updatedTag = await db
-//       .update(tags)
-//       .set({ name })
-//       .where(and(eq(tags.id, tagId), eq(tags.userId, userId)))
-//       .returning();
-
-//     if (updatedTag.length === 0) {
-//       return c.json({ error: 'Tag not found or unauthorized' }, 404);
-//     }
-
-//     return c.json(updatedTag[0]);
-//   })
-//   .delete('/tags/:id', async (c) => {
-//     const userId = c.get('userId');
-//     const tagId = parseInt(c.req.param('id'));
-
-//     const deletedTag = await db
-//       .delete(tags)
-//       .where(and(eq(tags.id, tagId), eq(tags.userId, userId)))
-//       .returning();
-
-//     if (deletedTag.length === 0) {
-//       return c.json({ error: 'Tag not found or unauthorized' }, 404);
-//     }
-
-//     return c.json({ message: 'Tag deleted successfully' });
-//   });
-
-// // 4. Endpoints للتعليقات (Comments)
-// app
-//   .post('/comments', async (c) => {
-//     const userId = c.get('userId');
-//     const { content, postId } = await c.req.json();
-
-//     const newComment = await db.insert(comments).values({
-//       content,
-//       userId,
-//       postId,
-//     }).returning();
-
-//     return c.json(newComment[0]);
-//   })
-//   .get('/comments', async (c) => {
-//     const allComments = await db.select().from(comments);
-//     return c.json(allComments);
-//   })
-//   .put('/comments/:id', async (c) => {
-//     const userId = c.get('userId');
-//     const commentId = parseInt(c.req.param('id'));
-//     const { content } = await c.req.json();
-
-//     const updatedComment = await db
-//       .update(comments)
-//       .set({ content })
-//       .where(and(eq(comments.id, commentId), eq(comments.userId, userId)))
-//       .returning();
-
-//     if (updatedComment.length === 0) {
-//       return c.json({ error: 'Comment not found or unauthorized' }, 404);
-//     }
-
-//     return c.json(updatedComment[0]);
-//   })
-//   .delete('/comments/:id', async (c) => {
-//     const userId = c.get('userId');
-//     const commentId = parseInt(c.req.param('id'));
-
-//     const deletedComment = await db
-//       .delete(comments)
-//       .where(and(eq(comments.id, commentId), eq(comments.userId, userId)))
-//       .returning();
-
-//     if (deletedComment.length === 0) {
-//       return c.json({ error: 'Comment not found or unauthorized' }, 404);
-//     }
-
-//     return c.json({ message: 'Comment deleted successfully' });
-//   });
-
-// export default app;
+  const postDetails = await getDetails(postId);
+  if (!postDetails) {
+    return errorResponse(
+      c,
+      400,
+      'PostNotFound',
+      getLocaleValue(c, 'PostNotFound')
+    );
+  }
+  const tagDetails = await getTagDetails(tagId);
+  if (!tagDetails) {
+    return errorResponse(
+      c,
+      400,
+      'TagNotFound',
+      getLocaleValue(c, 'TagNotFound')
+    );
+  }
+  await deleteTagFromPost(postId, tagId);
+  return c.json({ message: getLocaleValue(c, 'tag-removed-from-post') });
+};
