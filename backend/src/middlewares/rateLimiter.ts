@@ -5,11 +5,7 @@ const MAX_ATTEMPTS = 5;
 const BLOCK_TIME = 60 * 5;
 
 export const loginRateLimiter = async (c: Context, next: Next) => {
-  const ip =
-    c.req.header('x-forwarded-for') ||
-    c.req.header('cf-connecting-ip') ||
-    c.env?.remoteAddr;
-
+  const ip = c.req.header('x-forwarded-for') || c.req.header('x-real-ip');
   if (!ip) {
     return await next();
     return c.json({ error: 'Unable to detect IP' }, 400);

@@ -5,9 +5,29 @@ import { messages } from '../locales/locales';
 import { errorResponse } from '../utils/sendErrorResponse';
 import { DatabaseError } from 'pg';
 import { ContentfulStatusCode } from 'hono/utils/http-status';
-export default async function errorHandler(err: any, c: Context) {
+
+interface Err extends Error {
+  statusCode: ContentfulStatusCode;
+}
+
+function isErr(err: Err | Error): err is Err {
+  return 'statusCode' in err && typeof err.statusCode === 'number';
+}
+
+export default async function errorHandler(err: Error, c: Context) {
   logger.error(err);
-  let status: ContentfulStatusCode = err.statusCode || 500;
+  let status: ContentfulStatusCode = 500;
+  if (isErr(err)) {
+    status = err.statusCode;
+    return c.json(
+      {
+        status: err.statusCode,
+        code: err.name,
+        message: err.message,
+      },
+      err.statusCode
+    );
+  }
   let code = 'Server_Error';
   let message: string = getLocaleValue(
     c,

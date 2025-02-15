@@ -1,11 +1,4 @@
-import {
-  pgTable,
-  text,
-  timestamp,
-  serial,
-  integer,
-  uuid,
-} from 'drizzle-orm/pg-core';
+import { pgTable, text, timestamp, uuid } from 'drizzle-orm/pg-core';
 import { users, posts } from './schema';
 import { relations, sql } from 'drizzle-orm';
 

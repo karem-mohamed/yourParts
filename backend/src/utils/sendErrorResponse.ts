@@ -6,7 +6,7 @@ export const errorResponse = (
   status: ContentfulStatusCode,
   code: string,
   message: string,
-  errors?: any
+  errors?: unknown
 ) => {
   return c.json(
     {
