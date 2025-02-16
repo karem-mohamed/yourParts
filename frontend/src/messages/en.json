@@ -1,3 +1,42 @@
 {
-  "hello": "Hello"
+  "hello": "Hello",
+  "labels": {
+    "login": "Login",
+    "register": "Sign Up",
+    "email": "Email",
+    "otp": "OTP",
+    "username": "User Name",
+    "password": "Password",
+    "npassword": "New Password",
+    "name-email": "name / email",
+    "reset-pass": "Reset Password",
+    "confirm": "Confirm"
+  },
+
+  "questions": {
+    "have-account": "Don't have an account?",
+    "have-account-already": "Already Have Account",
+    "forget-pass": "forget password?"
+  },
+
+  "placeHolder": {
+    "pls-enter-username-mail": "Enter User Name or Email",
+    "pls-enter-username": "Enter UserName",
+    "pls-enter-email": "Enter Email",
+    "pls-enter-password": "Enter Password",
+    "pls-enter-otp": "Enter OTP"
+  },
+  "messages": {
+    "emailRequired": "Email is required",
+    "usernameRequired": "username is required",
+    "passwordRequired": "Password is required",
+    "shortLongUsername": "username should be more than 3 character and less than 15 character",
+    "shortLongOtp": "OTP should be more than or equal 4 character.",
+    "shortLongPassword": "Password should be more than 8 character and less than 30 character",
+    "invalidEmail": "Email should be in the right format",
+    "required": "This field is required",
+    "identifier-min-3": "identifier must be at least 3 characters",
+    "login-success": "Logged in Successfully",
+    "register-success": "Registered Successfully"
+  }
 }

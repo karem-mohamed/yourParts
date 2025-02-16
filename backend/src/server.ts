@@ -1,4 +1,5 @@
 import { Hono } from 'hono';
+import { cors } from 'hono/cors';
 import authRouter from './routes/auth';
 import langDetector from './middlewares/langDetector';
 import errorHandler from './middlewares/errorHandler';
@@ -8,6 +9,15 @@ import commentRouter from './routes/comments';
 import tagRouter from './routes/tags';
 
 const app = new Hono();
+
+///Cors
+app.use(
+  cors({
+    origin: '*',
+    allowMethods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+  })
+);
+
 ///Localization
 app.use(langDetector);
 
@@ -15,11 +25,11 @@ app.use(langDetector);
 app.onError(errorHandler);
 
 ///Routes
-app.route('/auth', authRouter);
-app.route('/categories', categoryRouter);
-app.route('/posts', postRouter);
-app.route('/comments', commentRouter);
-app.route('/tags', tagRouter);
+app.route('/api/auth', authRouter);
+app.route('/api/categories', categoryRouter);
+app.route('/api/posts', postRouter);
+app.route('/api/comments', commentRouter);
+app.route('/api/tags', tagRouter);
 
 const port = process.env.PORT || 5000;
 console.log(`Server is running on http://localhost:${process.env.PORT}`);

@@ -1,3 +1,41 @@
 {
-  "hello": "اهلا"
+  "hello": "اهلا",
+  "labels": {
+    "login": "تسجيل الدخول",
+    "register": "تسجيل حساب",
+    "email": "البريد الالكتروني",
+    "otp": "رمز التحقق",
+    "username": "الاسم",
+    "password": "الرقم السري",
+    "npassword": "الرقم السري الجديد",
+    "name-email": "الاسم / الايميل",
+    "reset-pass": "اعاده تعيين كلمة المرور",
+    "confirm": "تاكيد"
+  },
+  "questions": {
+    "have-account": "ليس لديك حساب؟",
+    "have-account-already": "لدي حساب بالفعل",
+    "forget-pass": "هل نسيت كلمة المرور؟"
+  },
+  "placeHolder": {
+    "pls-enter-username-mail": "ادخل الاسم او الايميل",
+    "pls-enter-username": "ادخل الاسم ",
+    "pls-enter-email": "ادخل البريد الالكتروني",
+    "pls-enter-password": "ادخل الرقم السري",
+    "pls-enter-otp": "ادخل رمز التحقق"
+  },
+  "messages": {
+    "emailRequired": "البريد الالكتروني مطلوب",
+    "usernameRequired": "الاسم مطلوب",
+    "passwordRequired": "كلمة المرور مطلوبة",
+    "shortLongUsername": "يجب أن لا يقل الاسم عن 8 حروف ولا تزيد عن 15 حرف",
+    "shortLongOtp": "يجب أن لا يقل رمز التحقق عن 4 حروف",
+    "invalidEmail": "يجب أن يكون البريد الالكتروني بالصيغة الصحيحة",
+    "shortLongPassword": "يجب أن لا تقل كلمة المرور عن 8 حروف ولا تزيد عن 30 حرف",
+    "required": "هذا الحقل مطلوب",
+    "identifier-min-3": "المعرف يجب ان لا يقل عن 3 احرف",
+    "login-success": "تم تسجيل الدخول بنجاح",
+    "register-success": "تم تسجيل الحساب بنجاح"
+  },
+  "buttons": {}
 }

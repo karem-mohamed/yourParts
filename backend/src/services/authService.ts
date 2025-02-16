@@ -58,12 +58,10 @@ export async function logOutUser(authHeader: string) {
   }
 }
 
-export async function checkOtp(otp: number, email: string) {
-  const savedOtp: string | number | null = await getValueFromRedis(
-    `forget:${email}`
-  );
+export async function checkOtp(otp: string, email: string) {
+  const savedOtp: string | null = await getValueFromRedis(`forget:${email}`);
   if (savedOtp) {
-    return otp === Number(savedOtp);
+    return otp === savedOtp;
   } else {
     return false;
   }

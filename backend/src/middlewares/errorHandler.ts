@@ -17,22 +17,23 @@ function isErr(err: Err | Error): err is Err {
 export default async function errorHandler(err: Error, c: Context) {
   logger.error(err);
   let status: ContentfulStatusCode = 500;
+  let code = 'Server_Error';
+  let message: string = getLocaleValue(
+    c,
+    (err.message as keyof (typeof messages)['en']) || 'server_error'
+  );
+  console.log(message);
   if (isErr(err)) {
     status = err.statusCode;
     return c.json(
       {
         status: err.statusCode,
         code: err.name,
-        message: err.message,
+        message,
       },
       err.statusCode
     );
   }
-  let code = 'Server_Error';
-  let message: string = getLocaleValue(
-    c,
-    (err.message as keyof (typeof messages)['en']) || 'server_error'
-  );
   if (err instanceof DatabaseError && err.code === '23505') {
     status = 400;
     message = getLocaleValue(

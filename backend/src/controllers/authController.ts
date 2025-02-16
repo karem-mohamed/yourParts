@@ -30,10 +30,11 @@ export const register = async (c: Context) => {
   }
 
   const { token, newUser } = await registerUser(username, email, password);
+  const { password: savePass, ...restData } = newUser;
   return c.json({
     message: getLocaleValue(c, 'user_registered_success'),
     token,
-    user: newUser,
+    user: restData,
   });
 };
 
@@ -53,7 +54,12 @@ export const login = async (c: Context) => {
     );
   }
   const { token, user } = await loginUser(identifier, password);
-  return c.json({ message: getLocaleValue(c, 'login_success'), token, user });
+  const { password: savePass, ...restData } = user;
+  return c.json({
+    message: getLocaleValue(c, 'login_success'),
+    token,
+    user: restData,
+  });
 };
 
 export const logout = async (c: Context) => {
@@ -93,7 +99,7 @@ export const verifyOtpAndResetPass = async (c: Context) => {
   const { otp, email, newPassword } = await c.req.json();
   const sameOtp = await checkOtp(otp, email);
   if (!sameOtp) {
-    return c.json({ message: getLocaleValue(c, 'wrong_otp') });
+    return c.json({ message: getLocaleValue(c, 'wrong_otp') }, 400);
   }
   await changePassword(email, newPassword);
   return c.json({ message: getLocaleValue(c, 'pass_changed') });
