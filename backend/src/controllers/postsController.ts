@@ -4,6 +4,7 @@ import getLocaleValue from '../utils/getLocaleValue';
 import { createPostSchema, updatePostSchema } from '../shemas';
 import {
   addTagtoPost,
+  countAllPosts,
   createPost,
   deletePost,
   deleteTagFromPost,
@@ -79,7 +80,7 @@ export const update = async (c: Context) => {
   if (updatedPost.length === 0) {
     return errorResponse(
       c,
-      401,
+      400,
       'CannotUpdatePost',
       getLocaleValue(c, 'cannot-update-post')
     );
@@ -89,8 +90,10 @@ export const update = async (c: Context) => {
 };
 
 export const getAllPublicPosts = async (c: Context) => {
-  const allPosts = await getAllPosts();
-  return c.json(allPosts);
+  const { limit, page } = await c.req.query();
+  const allPosts = await getAllPosts(parseInt(limit), parseInt(page));
+  const count = await countAllPosts();
+  return c.json({ posts: allPosts, count });
 };
 
 export const getAllOwnerPosts = async (c: Context) => {
@@ -113,7 +116,7 @@ export const deleteUserPost = async (c: Context) => {
   if (deletedPost.length === 0) {
     return errorResponse(
       c,
-      401,
+      400,
       'CannotDeletePost',
       getLocaleValue(c, 'cannot-delete-post')
     );

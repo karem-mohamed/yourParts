@@ -59,7 +59,7 @@ export const updateUserCategory = async (c: Context) => {
   if (updatedCategory.length === 0) {
     return errorResponse(
       c,
-      401,
+      400,
       'CannotUpdateCategory',
       getLocaleValue(c, 'cannot-update-category')
     );
@@ -69,7 +69,8 @@ export const updateUserCategory = async (c: Context) => {
 };
 
 export const getAllPublicCategories = async (c: Context) => {
-  const allCategories = await getAllCategories();
+  const { search, limit } = await c.req.query();
+  const allCategories = await getAllCategories(search, parseInt(limit));
   return c.json(allCategories);
 };
 
@@ -94,7 +95,7 @@ export const deleteUserCategory = async (c: Context) => {
   if (deletedCategory.length === 0) {
     return errorResponse(
       c,
-      401,
+      400,
       'CannotDeleteCategory',
       getLocaleValue(c, 'cannot-delete-category')
     );

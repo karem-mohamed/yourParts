@@ -1,4 +1,4 @@
-import { eq, and } from 'drizzle-orm';
+import { eq, and, like } from 'drizzle-orm';
 import { db } from '../config/db';
 import { categories } from '../models/schema';
 export const createCategory = async (
@@ -15,8 +15,20 @@ export const createCategory = async (
   return newCategory;
 };
 
-export const getAllCategories = async () => {
-  const allCategories = await db.select().from(categories);
+export const getAllCategories = async (search?: string, limit?: number) => {
+  let allCategories;
+  if (limit) {
+    allCategories = await db
+      .select()
+      .from(categories)
+      .where(search ? like(categories.name, `%${search}%`) : undefined)
+      .limit(limit);
+  } else {
+    allCategories = await db
+      .select()
+      .from(categories)
+      .where(search ? like(categories.name, `%${search}%`) : undefined);
+  }
   return allCategories;
 };
 

@@ -6,6 +6,8 @@ import {
   checkOtp,
   changePassword,
   userIsExist,
+  findUserById,
+  generateNewToken,
 } from '../services/authService';
 import getLocaleValue from '../utils/getLocaleValue';
 import { saveValueInRedis } from '../utils/redisFnc';
@@ -103,4 +105,14 @@ export const verifyOtpAndResetPass = async (c: Context) => {
   }
   await changePassword(email, newPassword);
   return c.json({ message: getLocaleValue(c, 'pass_changed') });
+};
+
+export const profile = async (c: Context) => {
+  const userId = await c.get('userId');
+  const user = await findUserById(userId);
+  const token = await generateNewToken(user.id);
+  return c.json({
+    token,
+    user,
+  });
 };

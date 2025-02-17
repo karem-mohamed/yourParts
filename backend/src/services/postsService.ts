@@ -1,4 +1,4 @@
-import { eq, and } from 'drizzle-orm';
+import { eq, and, count } from 'drizzle-orm';
 import { db } from '../config/db';
 import { posts, postsToTags } from '../models/schema';
 export const createPost = async (
@@ -27,13 +27,30 @@ export const deleteTagFromPost = async (postId: string, tagId: number) => {
     .delete(postsToTags)
     .where(and(eq(postsToTags.postId, postId), eq(postsToTags.tagId, tagId)));
 };
-
-export const getAllPosts = async () => {
-  const allPosts = await db.query.posts.findMany({
+export const getAllPosts = async (limit: number | undefined, page: number) => {
+  let allPosts = await db.query.posts.findMany({
     with: {
-      comments: true,
+      comments: {
+        with: {
+          user: {
+            columns: {
+              id: true,
+              username: true,
+            },
+          },
+        },
+      },
+      user: {
+        columns: {
+          id: true,
+          username: true,
+        },
+      },
     },
+    limit: limit,
+    offset: (page - 1) * (limit ?? 1),
   });
+
   return allPosts;
 };
 
@@ -41,11 +58,31 @@ export const getAllUserPosts = async (userId: string) => {
   const allPosts = await db.query.posts.findMany({
     where: eq(posts.userId, userId),
     with: {
-      comments: true,
+      comments: {
+        with: {
+          user: {
+            columns: {
+              id: true,
+              username: true,
+            },
+          },
+        },
+      },
+      user: {
+        columns: {
+          id: true,
+          username: true,
+        },
+      },
     },
   });
 
   return allPosts;
+};
+
+export const countAllPosts = async () => {
+  const [allCount] = await db.select({ count: count() }).from(posts);
+  return allCount.count;
 };
 
 export const getDetails = async (id: string) => {

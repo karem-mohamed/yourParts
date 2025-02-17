@@ -12,7 +12,7 @@ import {
 const commentRouter = new Hono();
 
 commentRouter.post('/create', isAuthenticated, create);
-commentRouter.patch('/update/:id', update);
+commentRouter.patch('/update/:id', isAuthenticated, update);
 commentRouter.delete('/delete/:id', isAuthenticated, deleteUserComment);
 commentRouter.get('/post/:postId', getPostComments);
 commentRouter.get('/:id', getCommentDetails);

@@ -83,3 +83,18 @@ export async function userIsExist(email: string) {
     .limit(1);
   return user ? true : false;
 }
+
+export async function findUserById(id: string) {
+  const [user] = await db
+    .select({ id: users.id, username: users.username, email: users.email })
+    .from(users)
+    .where(eq(users.id, id))
+    .limit(1);
+  return user;
+}
+
+export async function generateNewToken(userId: string) {
+  const token = nanoid();
+  await saveValueInRedis(`auth:${token}`, userId, 60 * 60 * 24);
+  return token;
+}

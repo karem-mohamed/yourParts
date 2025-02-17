@@ -44,7 +44,7 @@ export const updateUserTag = async (c: Context) => {
   if (updatedtag.length === 0) {
     return errorResponse(
       c,
-      401,
+      400,
       'CannotUpdatetag',
       getLocaleValue(c, 'cannot-update-tag')
     );
@@ -79,7 +79,7 @@ export const deleteUserTag = async (c: Context) => {
   if (deletedtag.length === 0) {
     return errorResponse(
       c,
-      401,
+      400,
       'CannotDeletetag',
       getLocaleValue(c, 'cannot-delete-tag')
     );

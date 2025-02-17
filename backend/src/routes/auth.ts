@@ -6,12 +6,15 @@ import {
   logout,
   forgetPassword,
   verifyOtpAndResetPass,
+  profile,
 } from '../controllers/authController';
+import isAuthenticated from '../middlewares/isAuthenticated';
 
 const authRouter = new Hono();
 
 authRouter.post('/register', register);
 authRouter.post('/login', loginRateLimiter, login);
+authRouter.get('/profile', isAuthenticated, profile);
 authRouter.post('/logout', logout);
 authRouter.post('/forget', forgetPassword);
 authRouter.post('/verify-otp', verifyOtpAndResetPass);

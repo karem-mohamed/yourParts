@@ -53,9 +53,9 @@ export const update = async (c: Context) => {
   if (updatedComment.length === 0) {
     return errorResponse(
       c,
-      401,
-      'CannotUpdatePost',
-      getLocaleValue(c, 'cannot-update-post')
+      400,
+      'CannotUpdateComment',
+      getLocaleValue(c, 'cannot-update-comment')
     );
   }
 
@@ -82,7 +82,7 @@ export const deleteUserComment = async (c: Context) => {
   if (deletedComment.length === 0) {
     return errorResponse(
       c,
-      401,
+      400,
       'CannotDeleteComment',
       getLocaleValue(c, 'cannot-delete-comment')
     );
