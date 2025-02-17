@@ -4,6 +4,7 @@ import PostCard from '@/components/PostCard';
 import { useFetchMyPosts } from '@/endpoints/myposts/getMyPosts';
 import { Post, Comment } from '@/endpoints/home/types';
 import { useCallback, useEffect, useState } from 'react';
+import { NoData } from '@/components/NoData';
 
 export default function MyPosts() {
   const { data, mutateAsync } = useFetchMyPosts();
@@ -22,16 +23,20 @@ export default function MyPosts() {
       <div
         className={`transition-all duration-300 ${targetComments ? 'md:w-[70%]' : 'md:w-full '} w-full`}
       >
-        {data?.map((post: Post, index: number) => {
-          return (
-            <PostCard
-              key={index}
-              targetComments={targetComments}
-              setTargetComments={setTargetComments}
-              post={post}
-            />
-          );
-        })}
+        {data?.length ? (
+          data?.map((post: Post, index: number) => {
+            return (
+              <PostCard
+                key={index}
+                targetComments={targetComments}
+                setTargetComments={setTargetComments}
+                post={post}
+              />
+            );
+          })
+        ) : (
+          <NoData />
+        )}
       </div>
       {targetComments ? (
         <div className="flex-1 hidden md:block ">

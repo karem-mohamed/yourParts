@@ -21,7 +21,7 @@
     "choose": "اختر خيارًا",
     "search-here": "ابحث هنا ...",
     "create-category": "انشاء تصنيف",
-    "create-tag": "انشاء علامه",
+    "create-tag": "إنشاء علامة",
     "name": "العنوان",
     "describtion": "الوصف"
   },
@@ -72,7 +72,8 @@
     "comment-e-success": "تم تعديل التعليق بنجاح",
     "category-e-success": "تم تعديل التصنيف بنجاح",
     "tag-e-success": "تم تعديل العلامة بنجاح",
-    "no-data": "لا يوجد بيانات"
+    "no-data": "لا يوجد بيانات ...",
+    "no-results": "لا توجد نتائج اضغط لتسجيل تصنيف جديد"
   },
   "buttons": {}
 }

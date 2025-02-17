@@ -10,13 +10,25 @@ export function middleware(req: NextRequest) {
   const locale = pathname.split('/')[1];
   if (locale in messages) {
     res.cookies.set('locale', locale);
-    return res;
+    const allowedRoutes = [
+      `/${locale}/login`,
+      `/${locale}/register`,
+      `/${locale}/reset`,
+      `/${locale}/home`,
+      `/${locale}/myposts`,
+      `/${locale}/categories`,
+      `/${locale}/tags`,
+    ];
+    const userLocale = locale in messages ? locale : 'en';
+    if (!allowedRoutes.includes(pathname)) {
+      return NextResponse.redirect(new URL(`/${userLocale}/login`, req.url));
+    }
   }
 
-  if (pathname === '/') {
+  if (req.nextUrl.pathname === '/') {
     return NextResponse.redirect(new URL('/en/home', req.url));
   }
-  return NextResponse.next();
+  return res;
 }
 
 export const config = {

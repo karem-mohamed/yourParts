@@ -1,6 +1,7 @@
 'use client';
 import { Category } from '@/endpoints/home/types';
 import { useTranslations } from 'next-intl';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
 interface Props {
@@ -19,6 +20,7 @@ export default function CustomSelect({
   const [isOpen, setIsOpen] = useState(false);
   const [search, setSearch] = useState('');
   const [selectedValue, setSelectedValue] = useState<string>();
+  const { push } = useRouter();
 
   const t = useTranslations();
 
@@ -62,7 +64,12 @@ export default function CustomSelect({
                 </li>
               ))
             ) : (
-              <li className="p-2 text-gray-500">لا توجد نتائج</li>
+              <li
+                onClick={() => push('categories')}
+                className="p-2 text-gray-500 cursor-pointer"
+              >
+                {t('messages.no-results')}
+              </li>
             )}
           </ul>
         </div>

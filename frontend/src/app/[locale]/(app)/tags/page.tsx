@@ -95,16 +95,16 @@ export default function MyCategories() {
   }, [isError]);
 
   return (
-    <div className="flex sm:flex-row flex-col flex-wrap gap-4">
-      <div className="w-full">
+    <div className="flex sm:flex-row flex-col flex-wrap gap-4 mt-2">
+      <div className="w-full text-end">
         <button
           onClick={() => setIsOpen(true)}
           className="p-2 bms-2 text-white bg-blue-600  rounded-md transition duration-200"
         >
-          <IoAdd size={20} />
+          <IoAdd size={25} />
         </button>
       </div>
-      {data ? (
+      {data?.length ? (
         data?.map((Tag: Tag, index: number) => {
           return (
             <CardItem

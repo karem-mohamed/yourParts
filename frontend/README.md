@@ -34,6 +34,9 @@
 
 - After running the server, you can navigate to `http://localhost:3000` in your browser.
 - You can start developing and the server will reload automatically for any code changes.
+- create user from regiter page
+- create category before creating post for categories page (third item in sidebar)
+- create post from home page which include public posts
 
 ## Scripts in `package.json`
 

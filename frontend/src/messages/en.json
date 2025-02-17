@@ -74,6 +74,7 @@
     "comment-e-success": "Comment Updated Successfully",
     "category-e-success": "Category Updated Successfully",
     "tag-e-success": "Tag Updated Successfully",
-    "no-data": "No Data"
+    "no-data": "No Data ...",
+    "no-results": "No Results Click to Create New Category"
   }
 }

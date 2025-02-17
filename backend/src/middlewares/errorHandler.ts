@@ -22,7 +22,6 @@ export default async function errorHandler(err: Error, c: Context) {
     c,
     (err.message as keyof (typeof messages)['en']) || 'server_error'
   );
-  console.log(message);
   if (isErr(err)) {
     status = err.statusCode;
     return c.json(
