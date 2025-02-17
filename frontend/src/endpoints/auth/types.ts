@@ -32,3 +32,7 @@ export interface LoginResponse {
 export interface ResetResponse {
   message: string;
 }
+
+export interface LogoutResponse {
+  message: string;
+}

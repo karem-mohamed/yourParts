@@ -32,11 +32,13 @@ export const register = async (c: Context) => {
   }
 
   const { token, newUser } = await registerUser(username, email, password);
-  const { password: savePass, ...restData } = newUser;
+  const user: Partial<typeof newUser> = newUser;
+  delete user.password;
+
   return c.json({
     message: getLocaleValue(c, 'user_registered_success'),
     token,
-    user: restData,
+    user: user,
   });
 };
 
@@ -56,11 +58,12 @@ export const login = async (c: Context) => {
     );
   }
   const { token, user } = await loginUser(identifier, password);
-  const { password: savePass, ...restData } = user;
+  const newUser: Partial<typeof user> = user;
+  delete newUser.password;
   return c.json({
     message: getLocaleValue(c, 'login_success'),
     token,
-    user: restData,
+    user: newUser,
   });
 };
 
@@ -69,8 +72,8 @@ export const logout = async (c: Context) => {
   if (!authHeader || !authHeader.startsWith('Bearer ')) {
     return c.json({ message: getLocaleValue(c, 'unauthorized') }, 401);
   }
-  await logOutUser(authHeader);
-  return c.json({ message: getLocaleValue(c, 'logout_success') });
+  const message = await logOutUser(authHeader);
+  return c.json({ message: getLocaleValue(c, message ?? 'logout_success') });
 };
 
 export const forgetPassword = async (c: Context) => {

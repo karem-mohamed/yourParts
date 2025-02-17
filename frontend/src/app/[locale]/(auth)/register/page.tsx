@@ -13,11 +13,15 @@ import { RegisterData } from '@/endpoints/auth/types';
 import useToast from '@/context/toastContext/useToast';
 import { useEffect } from 'react';
 import handleToken from '@/hooks/useSaveToken';
+import useUserContext from '@/context/userContext/useUserContext';
+import { useRouter } from 'next/navigation';
 
 export default function Login() {
   const t = useTranslations();
+  const { push } = useRouter();
   const locale = useLocale();
   const { showToast } = useToast();
+  const { setUserData } = useUserContext();
   const methods = useForm({
     defaultValues: {
       username: '',
@@ -26,12 +30,14 @@ export default function Login() {
     },
     resolver: yupResolver(registerSchema(locale)),
   });
-  const { mutateAsync, data, isError, error, isPending } = useRegister();
+  const { mutateAsync, isError, error, isPending } = useRegister();
   const { handleSubmit } = methods;
   const onSubmit = async (data: RegisterData) => {
     const response = await mutateAsync(data);
     handleToken(response);
+    setUserData(response.user);
     showToast(t('messages.register-success'), 'success');
+    push('home');
   };
 
   useEffect(() => {

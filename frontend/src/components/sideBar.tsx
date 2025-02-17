@@ -1,16 +1,41 @@
 'use client';
 import { useTranslations } from 'next-intl';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FiMenu, FiX, FiFileText, FiTag, FiLayers } from 'react-icons/fi';
 import { twMerge } from 'tailwind-merge';
 import { SlLogout } from 'react-icons/sl';
 import Languages from './languages';
 import { FaHome } from 'react-icons/fa';
 import Link from 'next/link';
-
+import { useLogout } from '@/endpoints/auth/logout';
+import useToast from '@/context/toastContext/useToast';
+import { COOKIES_KEYS } from '@/app-constants';
+import Cookies from 'js-cookie';
+import { useRouter } from 'next/navigation';
 export default function Sidebar() {
   const [isOpen, setIsOpen] = useState(false);
   const t = useTranslations();
+  const { showToast } = useToast();
+  const { push } = useRouter();
+  const { data, isSuccess, isError, error, mutateAsync } = useLogout();
+
+  const logOut = async () => {
+    await mutateAsync();
+  };
+
+  useEffect(() => {
+    if (isSuccess) {
+      showToast(data.message, 'success');
+      Cookies.remove(COOKIES_KEYS.token);
+      push('login');
+    }
+  }, [isSuccess]);
+
+  useEffect(() => {
+    if (isError && error) {
+      showToast(error.response.data.message, 'error');
+    }
+  }, [isError]);
   return (
     <div
       className={twMerge(
@@ -58,7 +83,10 @@ export default function Sidebar() {
 
         <div className="flex flex-col">
           <Languages isSliderOpen={isOpen} />
-          <button className="p-4 text-white focus:outline-none">
+          <button
+            onClick={logOut}
+            className="p-4 text-white focus:outline-none"
+          >
             {isOpen ? t('labels.logout') : <SlLogout size={24} />}
           </button>
         </div>

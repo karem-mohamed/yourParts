@@ -36,7 +36,7 @@ export default async function RootLayout({
   params: { locale: Locale };
 }) {
   const messages: AbstractIntlMessages = await getMessages();
-  let { locale } = await params;
+  const { locale } = await params;
   return (
     <html lang={locale} dir={locale === 'ar' ? 'rtl' : 'ltr'}>
       <body className={`${myFont.className}  antialiased`}>

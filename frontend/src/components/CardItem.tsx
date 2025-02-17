@@ -79,4 +79,6 @@ const CardItem = forwardRef(
   }
 );
 
+CardItem.displayName = 'CardItem';
+
 export default CardItem;

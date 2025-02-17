@@ -1,7 +1,7 @@
 import { UseMutationOptions, useMutation } from '@tanstack/react-query';
 import axios from '@/axiosInstance';
 import { APIError, APIResponse } from '@/types/axios';
-import { Post, Comment, CommentData } from './types';
+import { Comment, CommentData } from './types';
 
 export async function SendComment(data: CommentData) {
   try {

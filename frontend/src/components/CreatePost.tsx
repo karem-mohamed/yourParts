@@ -13,7 +13,7 @@ export default function CreatePost() {
   const { showToast } = useToast();
 
   const { mutateAsync: getCategories, data: categories } = useFetchCategories();
-  const { mutateAsync, data, isSuccess } = useCreatePost();
+  const { mutateAsync, isSuccess } = useCreatePost();
   console.log(categories);
   const fetchCategories = async () => {
     await getCategories({ limit: 10 });

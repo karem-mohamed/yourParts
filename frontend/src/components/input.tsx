@@ -7,14 +7,12 @@ interface InputProps {
   label?: string;
   className: string;
   placeholder?: string;
-  onEdit?: () => void;
 }
 export default function Input({
   type,
   name,
   label,
   className,
-  onEdit,
   placeholder,
 }: InputProps) {
   const {

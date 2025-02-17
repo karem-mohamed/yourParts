@@ -50,11 +50,15 @@ export async function loginUser(identifier: string, password: string) {
 
   return { token, user };
 }
-export async function logOutUser(authHeader: string) {
+export async function logOutUser(
+  authHeader: string
+): Promise<'userAlreadyLogedOut' | void> {
   const token = authHeader.split(' ')[1];
   const exists = await getValueFromRedis(`auth:${token}`);
   if (exists) {
     await removeFromRedis(`auth:${token}`);
+  } else {
+    return 'userAlreadyLogedOut';
   }
 }
 

@@ -29,6 +29,7 @@ export default function useRefetchUserData() {
       try {
         await mutateAsync(token);
       } catch (err) {
+        console.log(err);
         Cookies.remove(COOKIES_KEYS.token);
         replace('login');
       }

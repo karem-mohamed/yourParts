@@ -3,7 +3,7 @@ export const messages = {
     success: 'Operation completed successfully.',
     user_registered_success: 'registered successfully',
     login_success: 'Login successful',
-    logout_success: 'logout_success',
+    logout_success: 'Logout successful',
     inv_username_pass: 'Invalid username or password',
     inv_pass: 'Invalid password',
     inv_username_email: 'Invalid username or email',
@@ -38,6 +38,7 @@ export const messages = {
     categories_name_unique: 'category name is exist',
     validation_error: 'Validation Error',
     wrong_payload: 'Wrong Payload for updating',
+    userAlreadyLogedOut: 'user Already LogedOut',
   },
   ar: {
     success: 'تمت العملية بنجاح.',
@@ -77,5 +78,6 @@ export const messages = {
     categories_name_unique: 'اسم التصنيف موجود مسبقا',
     validation_error: 'خطأ التحقق',
     wrong_payload: 'لا يوجد داتا للتعديل',
+    userAlreadyLogedOut: 'المستخدم تم تسجيل خروجه بالفعل',
   },
 };

@@ -5,7 +5,6 @@ import { APIError, APIResponse } from '@/types/axios';
 
 export async function refetchUser(token: string) {
   try {
-    axios;
     const response: APIResponse<LoginResponse> = await axios.get(
       'auth/profile',
       {

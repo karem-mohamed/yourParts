@@ -23,7 +23,6 @@ export default function Login() {
   const { mutateAsync, data, isError, error, isPending } = useResetPassword();
   const {
     mutateAsync: verifyOtp,
-    data: verifyData,
     isError: isVerifyError,
     error: verifyError,
     isPending: isVerifyLoading,
@@ -45,12 +44,12 @@ export default function Login() {
   const { handleSubmit: submit } = restmethods;
 
   const onSubmit = async (data: ResetData) => {
-    let response = await mutateAsync(data);
+    const response = await mutateAsync(data);
     showToast(response.message, 'success');
   };
 
   const onfinish = async (data: OtpData) => {
-    let response = await verifyOtp({
+    const response = await verifyOtp({
       ...data,
       email: methods.getValues().email,
     });

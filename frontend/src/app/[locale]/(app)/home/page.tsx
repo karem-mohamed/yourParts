@@ -9,7 +9,7 @@ import { Post, Comment } from '@/endpoints/home/types';
 import { useEffect, useState } from 'react';
 
 export default function Home() {
-  let limit = 10;
+  const limit = 10;
   const { data, mutateAsync } = useFetchPosts();
   const [targetComments, setTargetComments] = useState<
     | {

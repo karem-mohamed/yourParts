@@ -12,7 +12,7 @@ export default function Layout({ children }: { children: ReactNode }) {
         <Header />
         <div className="pt-[70px]">
           <Sidebar />
-          <div className="ps-20 pe-5 ">{children}</div>
+          <div className="ps-20 pe-5  pb-10">{children}</div>
         </div>
       </div>
     </Suspense>

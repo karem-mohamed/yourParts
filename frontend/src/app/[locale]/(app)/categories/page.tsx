@@ -6,7 +6,7 @@ import useToast from '@/context/toastContext/useToast';
 import { useDeleteCategory } from '@/endpoints/categories/deletePost';
 import { useFetchCategories } from '@/endpoints/categories/getCategories';
 import { Category } from '@/endpoints/categories/types';
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { useTranslations } from 'use-intl';
 import { IoAdd } from 'react-icons/io5';
 import { useCreateCategory } from '@/endpoints/categories/ceateCategory';
@@ -42,12 +42,13 @@ export default function MyCategories() {
     }
   };
 
-  const getCategories = async () => {
+  const getCategories = useCallback(async () => {
     await mutateAsync();
-  };
+  }, [mutateAsync]);
+
   useEffect(() => {
     getCategories();
-  }, []);
+  }, [getCategories]);
 
   const deleteCategory = async (id: number | string) => {
     await deleteCategoryAsync(id);

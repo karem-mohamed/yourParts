@@ -29,7 +29,7 @@ export default function Login() {
     },
     resolver: yupResolver(loginSchema(locale)),
   });
-  const { mutateAsync, data, isError, error, isPending } = useLogin();
+  const { mutateAsync, isError, error, isPending } = useLogin();
   const { handleSubmit } = methods;
   const onSubmit = async (data: LoginData) => {
     const response = await mutateAsync(data);

@@ -1,7 +1,7 @@
 import { messages } from '@/messages';
 import { Locale } from '@/types/locale';
 import { createTranslator } from 'next-intl';
-import { lazy, number, object, string } from 'yup';
+import { object, string } from 'yup';
 
 const email = (locale: Locale) => {
   const t = createTranslator({ locale: locale, messages: messages[locale] });
@@ -44,7 +44,6 @@ export const registerSchema = (locale: Locale) => {
 };
 
 export const resetSchema = (locale: Locale) => {
-  const t = createTranslator({ locale: locale, messages: messages[locale] });
   return object({
     email: email(locale),
   });

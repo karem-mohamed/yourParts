@@ -28,7 +28,7 @@ export const deleteTagFromPost = async (postId: string, tagId: number) => {
     .where(and(eq(postsToTags.postId, postId), eq(postsToTags.tagId, tagId)));
 };
 export const getAllPosts = async (limit: number | undefined, page: number) => {
-  let allPosts = await db.query.posts.findMany({
+  const allPosts = await db.query.posts.findMany({
     with: {
       comments: {
         with: {

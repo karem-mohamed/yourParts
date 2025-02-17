@@ -12,6 +12,10 @@ export function middleware(req: NextRequest) {
     res.cookies.set('locale', locale);
     return res;
   }
+
+  if (pathname === '/') {
+    return NextResponse.redirect(new URL('/en/home', req.url));
+  }
   return NextResponse.next();
 }
 
