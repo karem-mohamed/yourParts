@@ -23,7 +23,6 @@ export default function Input({
   } = useFormContext();
 
   const { ref, ...restOfRegister } = register(name);
-  console.log(errors, 'sssssss');
   return (
     <>
       {label && (

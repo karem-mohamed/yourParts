@@ -10,13 +10,30 @@
     "npassword": "New Password",
     "name-email": "name / email",
     "reset-pass": "Reset Password",
-    "confirm": "Confirm"
+    "confirm": "Confirm",
+    "logout": "LogOut",
+    "home": "Home",
+    "myposts": "My Posts",
+    "categories": "Categories",
+    "tags": "Tags",
+    "cancel": "Cancel",
+    "post": "Post",
+    "choose": "Choose Option",
+    "search-here": "search here ...",
+    "create-category": "create category",
+    "create-tag": "create tag",
+    "name": "name",
+    "describtion": "describtion"
   },
 
   "questions": {
     "have-account": "Don't have an account?",
     "have-account-already": "Already Have Account",
-    "forget-pass": "forget password?"
+    "forget-pass": "forget password?",
+    "delete-post": "do you want delete post?",
+    "delete-comment": "do you want delete comment?",
+    "delete-category": "do you want delete category?",
+    "delete-tag": "do you want delete tag?"
   },
 
   "placeHolder": {
@@ -24,7 +41,11 @@
     "pls-enter-username": "Enter UserName",
     "pls-enter-email": "Enter Email",
     "pls-enter-password": "Enter Password",
-    "pls-enter-otp": "Enter OTP"
+    "pls-enter-otp": "Enter OTP",
+    "pls-enter-comment": "Write Comment ...",
+    "what-in-mind": "What's on your mind?",
+    "pls-enter-name": "Enter name",
+    "pls-enter-describtion": "Enter describtion"
   },
   "messages": {
     "emailRequired": "Email is required",
@@ -37,6 +58,22 @@
     "required": "This field is required",
     "identifier-min-3": "identifier must be at least 3 characters",
     "login-success": "Logged in Successfully",
-    "register-success": "Registered Successfully"
+    "register-success": "Registered Successfully",
+    "post-success": "Post Created Successfully",
+    "comment-success": "Comment Created Successfully",
+    "category-success": "Category Created Successfully",
+    "tag-success": "Tag Created Successfully",
+    "post-d-success": "Post Deleted Successfully",
+    "comment-d-success": "Comment Deleted Successfully",
+    "category-d-success": "Category Deleted Successfully",
+    "tag-d-success": "Tag Deleted Successfully",
+    "pls-choose-category-and-post": "pls choose category and write your post",
+    "pls-enter-fields-correctly": "pls enter fields correctly",
+
+    "post-e-success": "Post Updated Successfully",
+    "comment-e-success": "Comment Updated Successfully",
+    "category-e-success": "Category Updated Successfully",
+    "tag-e-success": "Tag Updated Successfully",
+    "no-data": "No Data"
   }
 }

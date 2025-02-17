@@ -10,19 +10,41 @@
     "npassword": "الرقم السري الجديد",
     "name-email": "الاسم / الايميل",
     "reset-pass": "اعاده تعيين كلمة المرور",
-    "confirm": "تاكيد"
+    "confirm": "تاكيد",
+    "logout": "تسجيل الخروج",
+    "home": "الرئيسية",
+    "myposts": "منشوراتي",
+    "categories": "تصنيفات",
+    "tags": "علامات",
+    "cancel": "إلغاء",
+    "post": "نشر",
+    "choose": "اختر خيارًا",
+    "search-here": "ابحث هنا ...",
+    "create-category": "انشاء تصنيف",
+    "create-tag": "انشاء علامه",
+    "name": "العنوان",
+    "describtion": "الوصف"
   },
   "questions": {
     "have-account": "ليس لديك حساب؟",
     "have-account-already": "لدي حساب بالفعل",
-    "forget-pass": "هل نسيت كلمة المرور؟"
+    "forget-pass": "هل نسيت كلمة المرور؟",
+    "delete-post": "هل تريد مسح المنشور؟",
+    "delete-comment": "هل تريد مسح التعليق؟",
+    "delete-category": "هل تريد مسح التصنيف؟",
+    "delete-tag": "هل تريد مسح العلامه؟"
   },
   "placeHolder": {
     "pls-enter-username-mail": "ادخل الاسم او الايميل",
     "pls-enter-username": "ادخل الاسم ",
     "pls-enter-email": "ادخل البريد الالكتروني",
     "pls-enter-password": "ادخل الرقم السري",
-    "pls-enter-otp": "ادخل رمز التحقق"
+    "pls-enter-otp": "ادخل رمز التحقق",
+    "pls-enter-comment": "اكتب تعليق ...",
+    "what-in-mind": "ما الذي يدور في ذهنك؟",
+    "pls-enter-name": "ادخل عنوان ",
+    "pls-enter-describtion": "ادخل الوصف ",
+    "pls-enter-fields-correctly": "ادخل الاسم والوصف بشكل صحيح"
   },
   "messages": {
     "emailRequired": "البريد الالكتروني مطلوب",
@@ -35,7 +57,22 @@
     "required": "هذا الحقل مطلوب",
     "identifier-min-3": "المعرف يجب ان لا يقل عن 3 احرف",
     "login-success": "تم تسجيل الدخول بنجاح",
-    "register-success": "تم تسجيل الحساب بنجاح"
+    "register-success": "تم تسجيل الحساب بنجاح",
+    "post-success": "تم اضافه المنشور بنجاح",
+    "comment-success": "تم اضافه تعليق بنجاح",
+    "category-success": "تم اضافه التصنيف بنجاح",
+    "tag-success": "تم اضافه العلامة بنجاح",
+    "post-d-success": "تم حذف المنشور بنجاح",
+    "comment-d-success": "تم حذف التعليق بنجاح",
+    "category-d-success": "تم حذف التصنيف بنجاح",
+    "tag-d-success": "تم حذف العلامة بنجاح",
+    "pls-choose-category-and-post": "من فضلك اختر تصنيف مع كتابه المنشور",
+
+    "post-e-success": "تم تعديل المنشور بنجاح",
+    "comment-e-success": "تم تعديل التعليق بنجاح",
+    "category-e-success": "تم تعديل التصنيف بنجاح",
+    "tag-e-success": "تم تعديل العلامة بنجاح",
+    "no-data": "لا يوجد بيانات"
   },
   "buttons": {}
 }

@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
+  --background: #f4f2ee;
   --foreground: #171717;
 }
 
@@ -21,4 +21,19 @@ body {
   font-family: 'Inter', Arial, sans-serif;
   position: relative;
   font-family: var(--font-shubbak);
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+  background: #f8f9ff;
+}
+::-webkit-scrollbar-track {
+  border-radius: 0;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-green-500;
+}
+::-webkit-scrollbar-thumb:window-inactive {
+  @apply bg-green-500;
 }

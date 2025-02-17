@@ -24,7 +24,7 @@ axiosInstance.interceptors.response.use(
       if (confirmed) {
         Cookies.remove(COOKIES_KEYS.token);
         Cookies.remove(COOKIES_KEYS.tokenExpireTime);
-        window.location.href = '/login';
+        window.location.href = 'login';
       }
     }
     return Promise.reject(error);

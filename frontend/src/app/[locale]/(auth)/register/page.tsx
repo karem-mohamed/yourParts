@@ -1,7 +1,7 @@
 'use client';
 import { useTranslations } from 'use-intl';
-import Button from '../../_components/button';
-import Input from '../../_components/input';
+import Button from '../../../../components/button';
+import Input from '../../../../components/input';
 import Card from '@/components/Card';
 import Link from 'next/link';
 import { FormProvider, useForm } from 'react-hook-form';

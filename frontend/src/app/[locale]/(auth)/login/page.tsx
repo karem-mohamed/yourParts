@@ -1,7 +1,7 @@
 'use client';
 import { useTranslations } from 'use-intl';
-import Button from '../../_components/button';
-import Input from '../../_components/input';
+import Button from '../../../../components/button';
+import Input from '../../../../components/input';
 import Card from '@/components/Card';
 import Link from 'next/link';
 import { FormProvider, useForm } from 'react-hook-form';
@@ -13,11 +13,15 @@ import { LoginData } from '@/endpoints/auth/types';
 import useToast from '@/context/toastContext/useToast';
 import { useEffect } from 'react';
 import handleToken from '@/hooks/useSaveToken';
+import useUserContext from '@/context/userContext/useUserContext';
+import { useRouter } from 'next/navigation';
 
 export default function Login() {
   const t = useTranslations();
+  const { push } = useRouter();
   const locale = useLocale();
   const { showToast } = useToast();
+  const { setUserData } = useUserContext();
   const methods = useForm({
     defaultValues: {
       identifier: '',
@@ -30,7 +34,9 @@ export default function Login() {
   const onSubmit = async (data: LoginData) => {
     const response = await mutateAsync(data);
     handleToken(response);
+    setUserData(response.user);
     showToast(t('messages.login-success'), 'success');
+    push('home');
   };
 
   useEffect(() => {

@@ -5,7 +5,7 @@ import Provider from './provider';
 import { Locale } from '../../types/locale';
 import { AbstractIntlMessages, NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
-import { ToastProvider } from '@/context/toastContext/toast.provider';
+import AppProvider from '../../components/appProvider';
 
 const myFont = localFont({
   src: [
@@ -42,7 +42,7 @@ export default async function RootLayout({
       <body className={`${myFont.className}  antialiased`}>
         <NextIntlClientProvider messages={messages}>
           <Provider>
-            <ToastProvider>{children}</ToastProvider>
+            <AppProvider>{children}</AppProvider>
           </Provider>
         </NextIntlClientProvider>
       </body>
