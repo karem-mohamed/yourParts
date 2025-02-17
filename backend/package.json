@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "dev": "tsc && npx bun run dist/src/server.js",
-    "dev-bun": "npx bun --watch src/server.ts",
+    "dev-tsc": "tsc && npx bun run dist/src/server.js",
+    "dev": "npx bun --watch src/server.ts",
     "test": "npx bun test",
     "migrate:generate": "npx drizzle-kit generate",
     "migrate:apply": "npx drizzle-kit push",
