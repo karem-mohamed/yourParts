@@ -58,7 +58,7 @@ test('should fetch all posts', async () => {
     content: 'Content 2',
     categoryId: cat.id,
   });
-  const allPosts = await getAllPosts();
+  const allPosts = await getAllPosts(10, 1);
   expect(allPosts.length).toBe(2);
 });
 
