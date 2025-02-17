@@ -4,6 +4,7 @@ import getLocaleValue from '../utils/getLocaleValue';
 import { createPostSchema, updatePostSchema } from '../shemas';
 import {
   addTagtoPost,
+  cachePosts,
   countAllPosts,
   createPost,
   deletePost,
@@ -11,6 +12,7 @@ import {
   getAllPosts,
   getAllUserPosts,
   getDetails,
+  removeCachePosts,
   updatePost,
 } from '../services/postsService';
 import { getDetails as getTagDetails } from '../services/tagService';
@@ -47,6 +49,7 @@ export const create = async (c: Context) => {
     content,
     categoryId,
   });
+  await removeCachePosts();
   return c.json(newPost, 201);
 };
 
@@ -85,7 +88,7 @@ export const update = async (c: Context) => {
       getLocaleValue(c, 'cannot-update-post')
     );
   }
-
+  await removeCachePosts();
   return c.json(updatedPost[0]);
 };
 
@@ -93,6 +96,7 @@ export const getAllPublicPosts = async (c: Context) => {
   const { limit, page } = await c.req.query();
   const allPosts = await getAllPosts(parseInt(limit), parseInt(page));
   const count = await countAllPosts();
+  await cachePosts(c.req.url, { posts: allPosts, count });
   return c.json({ posts: allPosts, count });
 };
 
@@ -121,6 +125,7 @@ export const deleteUserPost = async (c: Context) => {
       getLocaleValue(c, 'cannot-delete-post')
     );
   }
+  await removeCachePosts();
   return c.json({
     message: getLocaleValue(c, 'post-deleted-successfully'),
   });
@@ -149,6 +154,7 @@ export const addTag = async (c: Context) => {
     );
   }
   await addTagtoPost(postId, tagId);
+  await removeCachePosts();
   return c.json({ message: getLocaleValue(c, 'tag-added-to-post') });
 };
 
@@ -175,5 +181,6 @@ export const removeTag = async (c: Context) => {
     );
   }
   await deleteTagFromPost(postId, tagId);
+  await removeCachePosts();
   return c.json({ message: getLocaleValue(c, 'tag-removed-from-post') });
 };

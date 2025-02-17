@@ -39,6 +39,7 @@ export const messages = {
     validation_error: 'Validation Error',
     wrong_payload: 'Wrong Payload for updating',
     userAlreadyLogedOut: 'user Already LogedOut',
+    postHasTagBefore: 'Post Has Tag Before',
   },
   ar: {
     success: 'تمت العملية بنجاح.',
@@ -79,5 +80,6 @@ export const messages = {
     validation_error: 'خطأ التحقق',
     wrong_payload: 'لا يوجد داتا للتعديل',
     userAlreadyLogedOut: 'المستخدم تم تسجيل خروجه بالفعل',
+    postHasTagBefore: 'المنشور ينتمي بالفعل لهذا الوسم',
   },
 };

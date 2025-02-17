@@ -1,36 +1,146 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Frontend Project
 
-## Getting Started
+## Setup and Run Locally
 
-First, run the development server:
+### Prerequisites
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- Node.js (version >= 16)
+- npm
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Steps
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. Clone the repository:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+   ```
+   git clone <repository-url>
+   cd frontend
+   ```
 
-## Learn More
+2. Install dependencies:
 
-To learn more about Next.js, take a look at the following resources:
+   ```npm install
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+   ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+3. Run the development server:
 
-## Deploy on Vercel
+   ```npm run dev
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+   ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+   The project will be running at `http://localhost:3000`.
+
+## How to Use
+
+- After running the server, you can navigate to `http://localhost:3000` in your browser.
+- You can start developing and the server will reload automatically for any code changes.
+
+## Scripts in `package.json`
+
+- **`dev`**: Runs the development server with Turbopack for faster page refreshes and optimizations. Use this in development mode.
+  `   npm run dev`
+
+- **`build`**: Builds the project for production. This optimizes the app for best performance.
+
+  ```npm run build
+
+  ```
+
+- **`start`**: Starts the production server after the build has been completed.
+
+  ```npm run start
+
+  ```
+
+- **`lint`**: Lints the codebase using Next.js linting rules to ensure your code is clean and follows best practices.
+
+  ```npm run lint
+
+  ```
+
+- **`storybook`**: Starts Storybook in development mode, allowing you to test UI components in isolation on port `6006`.
+
+  ```npm run storybook
+
+  ```
+
+- **`build-storybook`**: Builds the Storybook project for production. It creates a static version of your Storybook to deploy.
+
+  ```npm run build-storybook
+
+  ```
+
+  ## Features Implemented
+
+### 1. **GIT & Source Control**
+
+- The project is hosted on GitHub and the code is regularly committed with descriptive commit messages.
+
+### 2. **TypeScript**
+
+- The entire project is built using TypeScript to ensure type safety, with interfaces and types used where appropriate.
+
+### 3. **Next.js**
+
+- Used the Next.js App Router for routing.
+- Implemented pages for creating, reading, updating, and deleting data fetched from a public API.
+- The app supports multiple languages (English and Arabic) for localization.
+
+### 4. **TailwindCSS**
+
+- The application is styled using only TailwindCSS, ensuring a clean, responsive, and visually appealing UI.
+
+### 5. **CRUD Operations**
+
+- Full CRUD operations have been implemented using a public API.
+- The homepage displays a list of items fetched from the API.
+- Functionality for creating, editing, and deleting items is included.
+- Pagination has been implemented for the list view.
+
+### 6. **Form Validation**
+
+- Implemented form validation (login/sigup page) to ensure that user inputs are valid.
+- User-friendly error messages are provided for invalid inputs.
+
+### 7. **Responsive Design**
+
+- The application is fully responsive, working well across different screen sizes and devices.
+
+### 8. **ESLint and Prettier**
+
+- ESLint has been set up for linting to enforce coding standards.
+- Prettier is configured to ensure consistent code formatting across the project.
+
+### 9. **Unit Tests**
+
+- (Not yet implemented)
+
+### 10. **Authentication**
+
+- User authentication is implemented using opaque tokens stored in cookies.
+- Users can log in using either their email or username.
+- if user make refresh we use token to fetch it's data again and still on same page.
+
+### 11. **Categories, Posts, Comments, and Tags**
+
+- CRUD operations are implemented for categories, posts, comments, and tags.
+- Users can edit/delete only their own categories, posts, comments, and tags, while public access is allowed for viewing other users’ data.
+
+## Frontend Bonus Points Done
+
+### 1. **Search and Filter Functionality**
+
+- done inside home page with search category input and i add pagination.
+
+### 2. **UI/UX Improvements**
+
+- done.
+
+### 3. **Accessibility Standards**
+
+- I tried to make the design simple and lightweight for the user to access.
+
+  ## Possible Improvements
+
+- Whenever an element is added, modified, or deleted, the current state is updated to improve and confirm the change to the user. This is easily done by modifying the component's state with some code, but currently, a refresh is required to display the values after the change.
+- Unit testing
