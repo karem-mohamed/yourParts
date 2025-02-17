@@ -14,7 +14,6 @@ export default function CreatePost() {
 
   const { mutateAsync: getCategories, data: categories } = useFetchCategories();
   const { mutateAsync, isSuccess } = useCreatePost();
-  console.log(categories);
   const fetchCategories = async () => {
     await getCategories({ limit: 10 });
   };
